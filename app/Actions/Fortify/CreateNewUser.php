@@ -23,7 +23,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => ['required', 'string', 'max:255'],
             'email' => 'required|string|email:strict|max:255|unique:Users,email',
             'password' => $this->passwordRules(),
-            'regkey' => 'in:' . env('REG_KEY'),
+            'regkey' => 'required|in:' . env('REG_KEY'),
         ])->validate();
 
         return User::create([
