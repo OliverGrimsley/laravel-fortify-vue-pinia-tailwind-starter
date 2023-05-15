@@ -33,15 +33,19 @@ If you are not using [Valet](https://laravel.com/docs/10.x/valet), you might nee
 
 (Assuming server is running and serving files from the directory) run `npm run build` to build the assets or `npm run dev` to start the Vite dev server.
 
+## Testing
+
+Run `php artisan test` (or `php artisan test --coverage`) in the command line.
+
 ## next steps
 
 You will probably want to implement an admin panel and authorization, and possibly passwordless login as well as mandatory 2FA etc.
 
 My actual application implements a backend admin panel to require 2FA for defined users, implements Bouncer for permissions and authorization etc.
 
-## Not done
+## Not done / to do 
 
-- tests
+- enhance tests (base testing is working)
 - responsive design
 
 ## License

@@ -1,8 +1,11 @@
 <?php
 
+use Tests\TestCase;
+use Laravel\Fortify\Features;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +19,8 @@ use Illuminate\Database\Eloquent\Model;
 */
 
 uses(
-    Tests\TestCase::class,
-    // Illuminate\Foundation\Testing\RefreshDatabase::class,
+    TestCase::class,
+    RefreshDatabase::class,
 )->in('Feature', 'Unit');
 
 /*
@@ -55,5 +58,13 @@ function clearDB($tables = null)
             DB::table($table)->truncate();
         }
         Schema::enableForeignKeyConstraints();
+    }
+}
+
+function TwoFactorEnabled()
+{
+    if (!Features::canManageTwoFactorAuthentication()) {
+        test()->markTestSkipped('Two factor authentication is not enabled.');
+        return;
     }
 }
