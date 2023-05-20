@@ -34,7 +34,7 @@
         Show recovery codes?
       </div>
     </div>
-    <div v-if="authStore.passwordNeedsConfirm">
+    <div v-if="authStore.passwordNeedsConfirm" class="mb-4">
       Please confirm your password:
       <form @submit.prevent="authStore.confirmPassword(password, 'show2FARecoveryCodes')">
         <text-input v-model="password" type="password" label="Confirm Password" />
@@ -43,21 +43,21 @@
     </div>
     <div v-if="authStore.user?.two_factor_confirmed_at">
       <div
-        v-if="!authStore.recoverycodes"
+        v-if="authStore.recoverycodes && authStore.recoverycodes.length === 0"
         @click="authStore.get2FARecoveryCodes()"
-        class="cursor-pointer rounded-md border bg-blue-500 px-2 text-white"
+        class="mb-4 w-1/2 cursor-pointer rounded-md border bg-slate-500 px-2 text-white"
       >
-        Show recovery codes?
+        Regenerate recovery codes?
       </div>
-      <div v-if="authStore.recoverycodes">
+      <div v-if="authStore.recoverycodes && authStore.recoverycodes?.length > 0">
         <div>Recovery codes:</div>
         <div v-for="(code, index) in authStore.recoverycodes">
           {{ index + 1 }}. <span class="font-mono">{{ code }}</span>
         </div>
       </div>
     </div>
-    <div v-if="twoFactorEnabled">
-      You have enabled two factor authentication, did you want to disable it?
+    <div v-if="twoFactorEnabled" class="mt-4">
+      <div class="mb-4">You have enabled two factor authentication, did you want to disable it?</div>
       <div>
         <button class="rounded-md border border-blue-600 bg-blue-600 px-2 text-white" @click="authStore.disableTwoFactor()">Disable 2FA</button>
       </div>
