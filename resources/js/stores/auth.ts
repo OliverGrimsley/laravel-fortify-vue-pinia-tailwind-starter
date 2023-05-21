@@ -33,7 +33,7 @@ export const useAuth = defineStore('auth', {
   actions: {
     async login(form: LoginDTO) {
       try {
-        const { data } = await axios.post('login', {
+        const { data } = await axios.post(route('login'), {
           email: form.email,
           password: form.password
         })
@@ -73,7 +73,7 @@ export const useAuth = defineStore('auth', {
     },
 
     async logout() {
-      await axios.post('logout')
+      await axios.post(route('logout'))
       this.user = {}
       this.loggedIn = false
       this.show2FACodeInput = false
@@ -136,7 +136,6 @@ export const useAuth = defineStore('auth', {
     async get2FACode() {
       try {
         const { data } = await axios.get(route('two-factor.qr-code'))
-        console.log('data', data)
         this.qrcode = data.svg
         this.qrURL = data.url
       } catch (error: any) {
@@ -170,10 +169,10 @@ export const useAuth = defineStore('auth', {
     },
 
     async submit2FACodeforLogin(code: string, recovery: boolean) {
-      console.log('submit2FACodeforLogin', code, recovery)
-
       try {
-        !recovery ? await axios.post('/two-factor-challenge', { code }) : await axios.post('/two-factor-challenge', { recovery_code: code })
+        !recovery
+          ? await axios.post(route('two-factor.challenge'), { code })
+          : await axios.post(route('two-factor.challenge'), { recovery_code: code })
         this.getUser()
         window.emitter.emit('flash', { type: 'success', msg: msg.LOGGED_IN })
         this.router.push({ name: 'home' })
