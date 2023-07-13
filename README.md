@@ -7,7 +7,7 @@ Even if you dont use this, hopefully this would help you get a Vue only front en
 Assumptions/dependencies:
 
 - the javascript is served by the same server as the backend (monolith/session based)
-- Configured to require a registration key (see example `example.env` file) - meaning, the initial user must also add this key - in my apps public registration is generally not permitted - this requirement could be removed. This could also be changed to use a signed URL and dynamic registration key
+- Configured to require a registration key (see example `.env.example` file) - meaning, the initial user must also add this key - in my apps public registration is generally not permitted - this requirement could be removed. This could also be changed to use a signed URL and dynamic registration key
 - assumes you have some local server running (I use [Valet](https://laravel.com/docs/10.x/valet))
 - this does not implement a Teams feature, or authorization system (it is already opinionated enough)
 - Uses [Ziggy](https://github.com/tighten/ziggy) to publish routes (and uses them in the Vue Router) - you might not like this and/or want to not publish all endpoints
